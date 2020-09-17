@@ -24,14 +24,15 @@ int main()
         int n;
         while (~scanf("%d", &n))
         {
-            string str[MAX];
+            string str[MAX]; //存储字符串
 
             for (int i = 0; i < n; ++i)
             {
                 cin >> str[i];
             }
             bool len_flag = true, isle_flag = true;
-            for (int i = 1; i < n; i++)
+            //判断是否符合两种排序的标准
+            for (int i = 1; i < n; i++) //判断是否符合长度排序
             {
                 if (str[i - 1].length() > str[i].length())
                 {
@@ -39,7 +40,7 @@ int main()
                     break;
                 }
             }
-            for (int i = 1; i < n; ++i)
+            for (int i = 1; i < n; ++i) //判断是否符合字典序排序
             {
                 if (str[i - 1] > str[i])
                 {

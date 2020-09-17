@@ -23,15 +23,15 @@ int main()
         char str2[MAX];
         int a[MAX];
         int j = 0, num = 0;
-        for (int i = 0; str[i] != '\0'; ++i)
+        for (int i = 0; str[i] != '\0'; ++i) //将*先加入a
         {
             if (str[i] == '*')
             {
-                str2[j] = '*';
-                a[i] = j++;
+                str2[j++] = '*';
+                a[i] = i;
             }
         }
-        for (int i = 0; str[i] != '\0'; ++i)
+        for (int i = 0; str[i] != '\0'; ++i) //再将其他字符加入a
         {
             if (str[i] != '*')
             {
@@ -41,11 +41,11 @@ int main()
         }
         str2[j] = '\0';
         a[j] = '\0';
-        for (int i = 0; i < j; ++i)
+        for (int i = 0; i < j; ++i) //判断字符串是否发生换位
         {
             if (a[i] != i)
                 num++;
         }
-        printf("%s\n%d\n", str2, num / 2);
+        printf("%s\n%d\n", str2, num);
     }
 }

@@ -13,7 +13,7 @@
 //#define INF 1000000000
 
 using namespace std;
-typedef long long int LL;
+//typedef long long int LL;
 struct bign
 {
     int num[MAX];
@@ -65,9 +65,9 @@ int main()
     char str1[MAX], str2[MAX];
     while (~scanf("%s %s", str1, str2))
     {
-        bign a = change(str1);
+        bign a = change(str1); //进行转换
         bign b = change(str2);
-        bign c = multi(a, b);
+        bign c = multi(a, b); //进行乘法
         for (int i = 0; i < c.len; i++)
         {
             printf("%d", c.num[c.len - i - 1]);
