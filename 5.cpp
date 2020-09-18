@@ -62,5 +62,4 @@ int main()
                 printf("No\n");
         }
     }
-    printf("\n");
 }
