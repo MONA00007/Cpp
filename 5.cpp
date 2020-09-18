@@ -29,32 +29,14 @@ int main()
             bool flag = false;
             if (len1 == len2)
             {
-                for (int i = 0, j = 0; i < len1; i++)
+                for (int i = 0; i < len2; i++)
                 {
-                    int k = j;
-                    while (j < len2)
-                    {
-                        if (str1[i++] != str2[j++])
-                            break;
-                    }
-                    if (j == len2 && k != len2)
-                    {
-                        for (j = 0; j < k; i++, j++)
-                        {
-                            if (str1[i] != str2[j])
-                                break;
-                        }
-                        if (j == k && str1[i] == '\0')
-                        {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    i = -1;
-                    j = k + 1;
-                    if (j == len2)
-                        break;
+                    str2[len2 + i] = str2[i];
                 }
+                len2 = len2 * 2;
+                str2[len2] = '\0';
+                if (strstr(str2, str1) != NULL)
+                    flag = true;
             }
             if (flag)
                 printf("Yes\n");
