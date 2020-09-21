@@ -23,7 +23,7 @@ int main()
         char str2[MAX];
         int a[MAX];
         int j = 0, num = 0;
-        for (int i = 0; str[i] != '\0'; ++i) //å°†*å…ˆåŠ å…¥a
+        for (int i = 0; str[i] != '\0'; ++i) //½«*ÏÈ¼ÓÈëa
         {
             if (str[i] == '*')
             {
@@ -31,7 +31,7 @@ int main()
                 a[i] = i;
             }
         }
-        for (int i = 0; str[i] != '\0'; ++i) //å†å°†å…¶ä»–å­—ç¬¦åŠ å…¥a
+        for (int i = 0; str[i] != '\0'; ++i) //ÔÙ½«ÆäËû×Ö·û¼ÓÈëa
         {
             if (str[i] != '*')
             {
@@ -41,7 +41,7 @@ int main()
         }
         str2[j] = '\0';
         a[j] = '\0';
-        for (int i = 0; i < j; ++i) //åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦å‘ç”Ÿæ¢ä½
+        for (int i = 0; i < j; ++i) //ÅĞ¶Ï×Ö·û´®ÊÇ·ñ·¢Éú»»Î»
         {
             if (a[i] != i)
                 num++;

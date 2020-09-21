@@ -24,15 +24,15 @@ int main()
         int n;
         while (~scanf("%d", &n))
         {
-            string str[MAX]; //å­˜å‚¨å­—ç¬¦ä¸²
+            string str[MAX]; //´æ´¢×Ö·û´®
 
             for (int i = 0; i < n; ++i)
             {
                 cin >> str[i];
             }
             bool len_flag = true, isle_flag = true;
-            //åˆ¤æ–­æ˜¯å¦ç¬¦åˆä¸¤ç§æ’åºçš„æ ‡å‡†
-            for (int i = 1; i < n; i++) //åˆ¤æ–­æ˜¯å¦ç¬¦åˆé•¿åº¦æ’åº
+            //ÅĞ¶ÏÊÇ·ñ·ûºÏÁ½ÖÖÅÅĞòµÄ±ê×¼
+            for (int i = 1; i < n; i++) //ÅĞ¶ÏÊÇ·ñ·ûºÏ³¤¶ÈÅÅĞò
             {
                 if (str[i - 1].length() > str[i].length())
                 {
@@ -40,7 +40,7 @@ int main()
                     break;
                 }
             }
-            for (int i = 1; i < n; ++i) //åˆ¤æ–­æ˜¯å¦ç¬¦åˆå­—å…¸åºæ’åº
+            for (int i = 1; i < n; ++i) //ÅĞ¶ÏÊÇ·ñ·ûºÏ×ÖµäĞòÅÅĞò
             {
                 if (str[i - 1] > str[i])
                 {

@@ -23,6 +23,11 @@ void generateP(int index, int n)
     if (index == n + 1)
     {
         num++;
+        for (int i = 1; i <= n; ++i)
+        {
+            printf("%d", p[i]);
+        }
+        printf("\n");
         return;
     }
     for (int i = 1; i <= n; i++)
