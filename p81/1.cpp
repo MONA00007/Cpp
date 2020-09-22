@@ -8,30 +8,33 @@
 #include <queue>
 #include <map>
 #include <set>
-#define MAX 101
+#define MAX 51
 //#define INF 1000000000
 using namespace std;
 //typedef long long int LL;
 
-struct node
+int n;
+int a[MAX][MAX] = {0};
+
+void f(int x)
 {
-    char str[MAX];
-    int deadline, time_need;
-};
+    int temp = x / 4;
+}
+
 int main(int agrc, char *agrv[])
 {
-    int T;
-    node a[20];
-    while (~scanf("%d", &T))
+    while (~scanf("%d", &n) && n)
     {
-        while (T--)
+        f(1);
+        for (int i = 1; i <= n; ++i)
         {
-            int n;
-            scanf("%d", &n);
-            for (int i = 0; i < n; ++i)
+            for (int j = 1; j <= n; ++j)
             {
-                scanf("%s %d %d", a[i].str, &a[i].deadline, &a[i].time_need);
+                printf("%d", a[i][j]);
+                if (j != n)
+                    printf(" ");
             }
+            printf("\n");
         }
     }
 }
