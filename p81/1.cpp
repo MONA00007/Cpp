@@ -13,19 +13,18 @@
 using namespace std;
 //typedef long long int LL;
 
-int n;
 int a[MAX][MAX] = {0};
 
-void f(int x)
+void f(int i, int j, int n)
 {
-    int temp = x / 4;
+    
 }
 
 int main(int agrc, char *agrv[])
 {
+    int n;
     while (~scanf("%d", &n) && n)
     {
-        f(1);
         for (int i = 1; i <= n; ++i)
         {
             for (int j = 1; j <= n; ++j)

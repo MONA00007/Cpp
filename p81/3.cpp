@@ -16,7 +16,7 @@ int item[MAX];
 
 int f(int left, int right) //左右标逼近
 {
-    if (left == right || right - left == 1) //左右标相邻或为同一个试，递归结束
+    if (left == right || (right - left == 1 && item[right] == item[left])) //左右标相邻或为同一个试，递归结束
         return 0;
     if (item[left] == item[right]) //左右标相等时，不做处理，左右标继续逼近
         return 0 + f(left + 1, right - 1);
