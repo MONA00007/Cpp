@@ -15,9 +15,21 @@ using namespace std;
 
 int a[MAX][MAX] = {0};
 
-void f(int i, int j, int n)
+void f(int i, int begin, int circle, int n) //每次递归填一圈，从最外圈开始
 {
-    
+    if (i == circle + 1)
+        return;
+    int j, k = i;
+    for (j = i; j <= n - k; j++)
+        a[i][j] = begin++;
+    for (; i <= n - k; i++)
+        a[i][j] = begin++;
+    for (; j > k; j--)
+        a[i][j] = begin++;
+    for (; i > k; i--)
+        a[i][j] = begin++;
+    i = k + 1;
+    return f(i, begin, circle, n);
 }
 
 int main(int agrc, char *agrv[])
@@ -25,6 +37,10 @@ int main(int agrc, char *agrv[])
     int n;
     while (~scanf("%d", &n) && n)
     {
+        f(1, 1, (n + 1) / 2, n);
+        int t = n / 2; //处理n为奇数时的情况
+        if (n % 2)
+            a[t + 1][t + 1] = n * n;
         for (int i = 1; i <= n; ++i)
         {
             for (int j = 1; j <= n; ++j)
