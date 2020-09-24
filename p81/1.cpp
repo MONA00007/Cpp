@@ -64,9 +64,9 @@ int main(int agrc, char *agrv[])
                 int a_t = g(a[i][j]);
                 for (int k = 0; k < col_t[j] - a_t; k++)
                     printf(" ");
-                printf("%d ", a[i][j]);
-                //if (j != n)
-                //  printf(" ");
+                printf("%d", a[i][j]);
+                if (j != n)
+                    printf(" ");
             }
             printf("\n");
         }

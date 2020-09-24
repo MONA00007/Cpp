@@ -71,14 +71,14 @@ int main(int agrc, char *agrv[])
             for (int j = 1; j <= n; ++j)
             {
                 int a_t = g(a[i][j]);
+
                 for (int k = 0; k < max_t - a_t; k++)
                     printf(" ");
                 printf("%d ", a[i][j]);
                 //if (j != n)
                 // printf(" ");
             }
-            //if (i != n)//´Ë´¦ÐÞ¸Ä
-            //  printf("\n");
+            printf("\n");
         }
     }
 }
