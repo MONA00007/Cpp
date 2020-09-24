@@ -56,7 +56,6 @@ int main(int agrc, char *agrv[])
         if (n % 2)
             max_t = g(max);
         else
-
             max_t = g(a[n / 2 + 1][n / 2]);
         /*int col_t[MAX];
         for (int i = 1; i <= n / 2; i++)
@@ -67,7 +66,6 @@ int main(int agrc, char *agrv[])
         int col_1_t = g(a[2][1]);
         for (int i = 1; i <= n; ++i)
         {
-
             for (int j = 1; j <= n; ++j)
             {
                 int a_t = g(a[i][j]), temp;
