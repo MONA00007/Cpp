@@ -8,7 +8,7 @@
 #include <queue>
 #include <map>
 #include <set>
-#define MAX 51
+#define MAX 100001
 //#define INF 1000000000
 using namespace std;
 //typedef long long int LL;

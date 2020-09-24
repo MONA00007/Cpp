@@ -32,7 +32,7 @@ void f(int i, int begin, int circle, int n) //每次递归填一圈，从最外圈开始
     return f(i, begin, circle, n);
 }
 
-int g(int n) //计算每个数长度
+int g(int n)
 {
 
     int temp = n / 10;
@@ -52,23 +52,33 @@ int main(int agrc, char *agrv[])
         int max = n * n;
         if (n % 2)
             a[t + 1][t + 1] = max;
-        int col_t[MAX]; //存储每列最长的数的长度
+        int max_t;
+        if (n % 2)
+            max_t = g(max);
+        else
+
+            max_t = g(a[n / 2 + 1][n / 2]);
+
+        /*int col_t[MAX];
         for (int i = 1; i <= n / 2; i++)
-            col_t[i] = g(a[i + 1][i]);
-        for (int i = n; i > n / 2; i--)
-            col_t[i] = g(a[i][i]);
+            col_t[i] = col_t[n + 1 - i] = g(a[i + 1][i]);
+        if (n % 2)
+            col_t[n / 2 + 1] = g(a[n / 2 + 1][n / 2 + 1]);
+            */
         for (int i = 1; i <= n; ++i)
         {
+
             for (int j = 1; j <= n; ++j)
             {
                 int a_t = g(a[i][j]);
-                for (int k = 0; k < col_t[j] - a_t; k++)
+                for (int k = 0; k < max_t - a_t; k++)
                     printf(" ");
                 printf("%d ", a[i][j]);
                 //if (j != n)
-                //  printf(" ");
+                // printf(" ");
             }
-            printf("\n");
+            //if (i != n)//此处修改
+            //  printf("\n");
         }
     }
 }

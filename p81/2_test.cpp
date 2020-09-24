@@ -13,22 +13,26 @@
 using namespace std;
 //typedef long long int LL;
 int num[MAX];
-int f(int n) //Ê®½øÖÆ¸÷Î»Ïà¼Ó
+int f(int n) //åè¿›åˆ¶å„ä½ç›¸åŠ 
 {
-    int temp = n / 10;
-    if (temp)
-        return f(temp) + n % 10;
-    else
-        return n;
+    int times = 0;
+    do
+    {
+        times += (n % 10);
+        n /= 10;
+    } while (n);
+    return times;
 }
 
-int g(int n) //¶ş½øÖÆ¸÷Î»Ïà¼Ó
+int g(int n) //äºŒè¿›åˆ¶å„ä½ç›¸åŠ 
 {
-    int temp = n / 2;
-    if (temp)
-        return g(temp) + n % 2;
-    else
-        return n;
+    int times = 0;
+    do
+    {
+        times += (n % 2);
+        n /= 2;
+    } while (n);
+    return times;
 }
 
 int main(int agrc, char *agrv[])
@@ -37,7 +41,7 @@ int main(int agrc, char *agrv[])
     //int num[MAX];
     memset(num, -1, sizeof(num));
     num[0] = 0;
-    for (int i = 1; i <= MAX - 1; i++) //´ò±í·¨
+    for (int i = 1; i <= MAX - 1; i++) //æ‰“è¡¨æ³•
     {
         int f1 = f(i);
         int g1 = g(i);
@@ -48,6 +52,6 @@ int main(int agrc, char *agrv[])
     }
     while (~scanf("%d", &n))
     {
-        printf("%d\n", num[n]); //Ö±½Ó²é±íÊä³ö
+        printf("%d\n", num[n]); //ç›´æ¥æŸ¥è¡¨è¾“å‡º
     }
 }
