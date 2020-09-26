@@ -16,7 +16,7 @@ using namespace std;
 int a[MAX];
 int find(int n, int x)
 {
-    int low = 0, mid, high = x - 1;
+    int low = 0, mid, high = n - 1;
     while (low <= high)
     {
         mid = (low + high) / 2;
@@ -27,7 +27,13 @@ int find(int n, int x)
         else
             low = mid + 1;
     }
-    //high m low   m high low    high low m    NULL
+    //high m low   m high low    high low m
+    if (x > a[high] && x < a[low])
+        return min(abs(x - a[high]), abs(x - a[low]));
+    else if (x < a[high])
+        return a[low];
+    else
+        return a[high];
 }
 int main(int agrc, char *agrv[])
 {
