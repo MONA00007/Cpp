@@ -19,10 +19,11 @@ int find(int n, int c) //先排序，再进行二分查找
 {
     sort(a, a + n);
     int t = 0;
+    bool flag = false;
+    int low, high, mid;
     for (int i = 0; i < n - 1; i++)
     {
-        int low = i + 1, high = n - 1, mid;
-        bool flag = false;
+        low = i + 1, high = n - 1, mid;
         while (low <= high)
         {
             if (flag)
@@ -39,6 +40,7 @@ int find(int n, int c) //先排序，再进行二分查找
                     else
                         break;
                 }
+                break;
             }
             else if (a[mid] - a[c] > c)
                 high = mid - 1;

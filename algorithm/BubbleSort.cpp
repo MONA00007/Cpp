@@ -57,10 +57,10 @@ int main()
         {
             scanf("%d", &a[i]);
         }
-        printf("≈≈–Ú«∞£∫\n");
+        printf("???®∞?°„??\n");
         disp(a, n);
         BubbleSort(a, 0, n);
-        printf("≈≈–Ú∫Û£∫\n");
+        printf("???®∞?®Æ??\n");
         disp(a, n);
     }
 }
