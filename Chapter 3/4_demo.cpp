@@ -9,21 +9,18 @@
 #include <queue>
 #include <map>
 #include <set>
-#define MAX 201
+#define MAX 51
 //#define INF 1000000000
 using namespace std;
 //typedef long long int LL;
-
-//利用两路归并排序的思想，在排序过程中确定逆序对个数
-
 struct node
 {
     int key, value;
 };
-char a[MAX][MAX];
+char a[MAX * 2][MAX], c[MAX * 2][MAX];
 int num;
 
-bool cmp(node a, node b) //逆序对个数不相等，按逆序对升序排序；相等按key升序排序
+bool cmp(node a, node b)
 {
     if (a.value != b.value)
         return a.value < b.value;
@@ -32,32 +29,31 @@ bool cmp(node a, node b) //逆序对个数不相等，按逆序对升序排序�
 }
 
 void Merge(int L_left, int L_right, int R_left, int R_right, int index)
-//合并操作，合并过程中记录逆序对个数
 {
     int temp[2 * MAX];
     int k = 0;
     int i = L_left, j = R_left;
     while (i <= L_right && j <= R_right)
     {
-        if (a[index][i] <= a[index][j])
-            temp[k++] = a[index][i++];
+        if (c[index][i] <= c[index][j])
+            temp[k++] = c[index][i++];
         else
         {
-            temp[k++] = a[index][j++];
-            num += L_right - i + 1; //记录逆序对
+            temp[k++] = c[index][j++];
+            num += L_right - i + 1;
         }
     }
     while (i <= L_right)
-        temp[k++] = a[index][i++];
+        temp[k++] = c[index][i++];
     while (j <= R_right)
-        temp[k++] = a[index][j++];
+        temp[k++] = c[index][j++];
     for (int i = 0; i < k; i++)
     {
-        a[index][L_left++] = temp[i];
+        c[index][L_left++] = temp[i];
     }
 }
 
-void MergeSort(int left, int right, int index) //两路归并排序
+void MergeSort(int left, int right, int index)
 {
     if (left < right)
     {
@@ -77,15 +73,19 @@ int main(int agrc, char *agrv[])
         for (int i = 0; i < m; i++)
         {
             scanf("%s", a[i]);
+            for (int j = 0; j < n; j++)
+            {
+                c[i][j] = a[i][j];
+            }
             num = 0;
             MergeSort(0, n - 1, i);
-            b[i].key = i;     //记录id
-            b[i].value = num; //记录逆序对
+            b[i].key = i;
+            b[i].value = num;
         }
         sort(b, b + m, cmp);
         for (int i = 0; i < m; i++)
         {
-            printf("%d %d\n", b[i].key, b[i].value);
+            printf("%s\n", a[b[i].key]);
         }
     }
 }
