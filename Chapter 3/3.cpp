@@ -27,13 +27,18 @@ int find(int n, int x)
         else
             low = mid + 1;
     }
-    //high m low   m high low    high low m
-    if (x > a[high] && x < a[low])
-        return min(abs(x - a[high]), abs(x - a[low]));
-    else if (x < a[high])
-        return a[low];
-    else
-        return a[high];
+    /*
+    if (high == -1) //high(-1) low x
+        return (a[low + 1] - x) - (x - a[low]) >= 0 ? a[low] : a[low + 1];
+    else if (low == n) //x high low(n)
+        return (a[high] - x) - (x - a[high - 1]) >= 0 ? a[high - 1] : a[high];
+    else if (x > a[high] && x < a[low]) //high x low
+        return (a[low] - x) - (x - a[high]) >= 0 ? a[high] : a[low];
+    else if (x < a[high]) //x high low
+        return (a[high] - x) - (x - a[high - 1]) >= 0 ? a[high - 1] : a[high];
+    else if (x > a[low]) //high low x
+        return (a[low + 1] - x) - (x - a[low]) >= 0 ? a[low] : a[low + 1];
+        */
 }
 int main(int agrc, char *agrv[])
 {

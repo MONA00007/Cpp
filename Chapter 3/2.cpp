@@ -17,7 +17,7 @@ int a[MAX];
 
 int find(int n, int m)
 {
-    int low = 0, mid, high = m - 1;
+    int low = 0, mid, high = n - 1;
     while (low <= high)
     {
         mid = (low + high) / 2;
@@ -28,18 +28,16 @@ int find(int n, int m)
         else
             low = mid + 1;
     }
-    //high m low   m high low    high low m    NULL
-    if (m > a[high] && m < a[low])
+    /*if (high == -1) //high(-1) low m
+        return -1;
+    else if (low == n) //m high low(n)
         return a[high];
-    else if (m < a[high])
-        return a[low];
-    else
-    {
-        if (high == 0)
-            return -1;
-        else
-            return a[high - 1];
-    }
+    else if (m > a[high] && m < a[low]) //high m low
+        return a[high];
+    else if (m < a[high]) //m high low
+        return a[high - 1];
+    else if (m > a[low]) //high low m
+        return a[low];*/
 }
 
 int main(int agrc, char *agrv[])

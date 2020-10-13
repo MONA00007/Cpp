@@ -9,42 +9,45 @@
 #include <queue>
 #include <map>
 #include <set>
-#define MAX 51
+#define MAX 1000001
 //#define INF 1000000000
 using namespace std;
 //typedef long long int LL;
-int a[MAX];
+vector<int> vi;
 
 int find(int n, int c) //先排序，再进行二分查找
 {
-    sort(a, a + n);
+    sort(vi.begin(), vi.begin() + n);
     int t = 0;
-    bool flag = false;
     int low, high, mid;
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i <= n - 1; i++)
     {
-        low = i + 1, high = n - 1, mid;
+        low = 0, high = n - 1, mid;
         while (low <= high)
         {
-            if (flag)
-                flag = false;
-            else
-                mid = (low + high) / 2;
-            if (a[mid] - a[i] == c)
+            mid = (low + high) / 2;
+            if (vi[mid] - vi[i] == c)
             {
-                flag = true;
-                for (int j = mid; j < n; ++j)
+                t++;
+                for (int j = mid + 1; j < n; ++j)
                 {
-                    if (a[j] - a[i] == c)
+                    if (vi[j] - vi[i] == c)
+                        t++;
+                    else
+                        break;
+                }
+                for (int j = mid - 1; j >= 0; --j)
+                {
+                    if (vi[j] - vi[i] == c)
                         t++;
                     else
                         break;
                 }
                 break;
             }
-            else if (a[mid] - a[c] > c)
+            else if (vi[mid] - vi[i] > c)
                 high = mid - 1;
-            else
+            else if (vi[mid] - vi[i] < c)
                 low = mid + 1;
         }
     }
@@ -53,13 +56,22 @@ int find(int n, int c) //先排序，再进行二分查找
 
 int main(int agrc, char *agrv[])
 {
-    int n, c;
-    while (~scanf("%d %d", &n, &c))
+    int n, c, a, s, m, k;
+
+    //while (~scanf("%d %d", &n, &c))
+    scanf("%d %d", &n, &c);
     {
-        for (int i = 0; i < n; ++i)
+        k = 0;
+        while (~scanf("%d %d %d", &a, &s, &m))
         {
-            scanf("%d", &a[i]);
+            for (int i = 0; i < m; i++)
+            {
+                vi.push_back(a);
+                k++;
+                a += s;
+            }
         }
-        printf("%d\n", find(n, c));
+        printf("%d", find(min(n, k), c));
+        //vi.clear();
     }
 }
