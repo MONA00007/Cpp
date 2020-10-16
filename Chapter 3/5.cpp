@@ -43,7 +43,7 @@ void init()
     }
 }
 
-void getSize(int u, int fa) //以uu为根的子树大小
+void getSize(int u, int fa) //以u为根的子树大小
 {
     size[u] = 1;
     ms[u] = 0;
