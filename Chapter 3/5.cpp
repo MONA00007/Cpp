@@ -22,7 +22,7 @@ struct node
 int n, m, cnt, ans, Min, root;
 int head[MAX], depth[MAX], size[MAX], ms[MAX];
 bool vis[MAX];
-
+//ms[i]代表i节点中子树最大的size
 void add(int a, int b, int c)
 {
     edge[cnt].to = b, edge[cnt].val = c, edge[cnt].next = head[a];
