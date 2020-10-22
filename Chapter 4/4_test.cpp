@@ -24,7 +24,7 @@ struct node
 int BFS(node st)
 {
     node now, next, temp;
-    vis[st.px][st.py][st.bx][st.by];
+    vis[st.px][st.py][st.bx][st.by] = true;
     queue<node> q;
     q.push(st);
     while (!q.empty())
@@ -42,7 +42,7 @@ int BFS(node st)
 
                 if (next.bx == next.px && next.by == next.py) //人走到箱子上
                 {
-                    temp = next, temp.bx += xx[i], temp.by = yy[i];
+                    temp = next, temp.bx += xx[i], temp.by += yy[i];
                     if (g[temp.bx][temp.by]) //箱子是否可以推动
                         next = temp, flag = true;
                 }
@@ -68,6 +68,7 @@ int main(int agrc, char *agrv[])
         memset(vis, false, sizeof(vis));
         char str[maxn];
         node st;
+        st.step = 0;
         for (int i = 1; i <= n; i++)
         {
             scanf("%s", str);
