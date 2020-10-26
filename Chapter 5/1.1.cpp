@@ -18,33 +18,36 @@ struct node
 {
     int st, ed;
 } act[MAX];
-void DFS()
+int x[MAX];
+void DFS(int index)
 {
-    bool flag = true;
+    if (index >= n)
+    {
+        maxn = max(maxn, ans);
+        return;
+    }
     for (int i = 0; i < n; i++)
     {
-        if (laste <= act[i].st)
+        swap(x[index], x[i]);
+        int laste1 = laste, ans1 = ans;
+        if (laste <= act[x[i]].st)
         {
-            int t = act[i].ed - act[i].st, laste1 = laste;
-            ans += t;
-            laste = act[i].ed;
-            DFS();
-            ans -= t;
-            laste = laste1;
-            flag = false;
+            ans += act[x[i]].ed - act[x[i]].st;
+            laste = act[x[i]].ed;
         }
+        DFS(index + 1);
+        swap(x[index], x[i]);
+        laste = laste1, ans = ans1;
     }
-    if (flag)
-        maxn = max(maxn, ans);
 }
 int main(int agrc, char *agrv[])
 {
     while (~scanf("%d", &n))
     {
         for (int i = 0; i < n; i++)
-            scanf("%d %d", &act[i].st, &act[i].ed);
+            scanf("%d %d", &act[i].st, &act[i].ed), x[i] = i;
         maxn = 0, laste = 0, ans = 0;
-        DFS();
+        DFS(0);
         printf("%d", maxn);
     }
 }
