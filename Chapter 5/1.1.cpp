@@ -13,7 +13,7 @@
 //#define INF 1000000000
 using namespace std;
 //typedef long long int LL;
-int n, maxn, laste, ans;
+int n, maxn, laste, ans, maxst;
 struct node
 {
     int st, ed;
@@ -21,20 +21,21 @@ struct node
 int x[MAX];
 void DFS(int index)
 {
-    if (index >= n)
+    if (index == n)
     {
         maxn = max(maxn, ans);
         return;
     }
-    for (int i = 0; i < n; i++)
+    for (int i = index; i < n; i++)
     {
-        swap(x[index], x[i]);
+
         int laste1 = laste, ans1 = ans;
-        if (laste <= act[x[i]].st)
+        if (laste <= act[x[i]].st && laste <= maxst)
         {
             ans += act[x[i]].ed - act[x[i]].st;
             laste = act[x[i]].ed;
         }
+        swap(x[index], x[i]);
         DFS(index + 1);
         swap(x[index], x[i]);
         laste = laste1, ans = ans1;
@@ -44,8 +45,13 @@ int main(int agrc, char *agrv[])
 {
     while (~scanf("%d", &n))
     {
+        maxst = 0;
         for (int i = 0; i < n; i++)
-            scanf("%d %d", &act[i].st, &act[i].ed), x[i] = i;
+        {
+            scanf("%d %d", &act[i].st, &act[i].ed);
+            x[i] = i;
+            maxst = max(maxst, act[i].st);
+        }
         maxn = 0, laste = 0, ans = 0;
         DFS(0);
         printf("%d", maxn);

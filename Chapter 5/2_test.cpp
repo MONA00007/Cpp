@@ -29,10 +29,10 @@ void DFS(int index)
     }
     for (int i = 0; i < m; i++)
     {
-        tc += a[i][index].c, tw += a[i][index].w, rw -= a[i][index].w;
-        if (cost >= tc && minw > tw && tw + rw < minw)
+        tc += a[i][index].c, tw += a[i][index].w;
+        if (cost >= tc && minw > tw)
             DFS(index + 1);
-        tc -= a[i][index].c, tw -= a[i][index].w, rw += a[i][index].w;
+        tc -= a[i][index].c, tw -= a[i][index].w;
     }
 }
 
@@ -43,15 +43,12 @@ int main(int agrc, char *agrv[])
         int rw = 0;
         for (int i = 0; i < n; i++)
         {
-            int temp = INF;
+
             for (int j = 0; j < m; j++)
             {
                 scanf("%d", &a[j][i].w);
-                temp = min(temp, a[j][i].w);
             }
-            rw += temp;
         }
-
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < m; j++)

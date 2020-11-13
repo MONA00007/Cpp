@@ -1,44 +1,58 @@
 #include <iostream>
+#include <algorithm>
 #include <cstdio>
 using namespace std;
 
-#define MAX 20 //仅说明方法，未按照题目要求
-int n;
+#define MAX 55
+int n, maxst;
 int ans, temp, counter;
 
 struct classroom
 {
     int start;
     int end;
-};
+} a[MAX];
 
-void dfs(classroom a[], int i)
+bool cmp(classroom a, classroom b)
+{
+    return a.start < b.start;
+}
+
+void dfs(int i, int rws)
 {
     counter = 0;
-    for (int j = 1; j <= n; j++)
+    for (int j = i + 1; j <= n; j++)
     {
+        int t = (a[j].end - a[j].start);
+        rws -= t;
+        if (a[i].end > maxst || rws + t + temp <= ans)
+            break;
         if (a[j].start >= a[i].end)
         {
-            int t = (a[j].end - a[j].start);
             temp += t;
-            dfs(a, j);
-            temp -= t; //回溯
+            dfs(j, rws);
+            temp -= t;
             counter++;
         }
     }
-    if (counter == 0)
-        if (temp > ans)
-            ans = temp;
+    if (!counter)
+        ans = max(ans, temp);
 }
 
 int main()
 {
     cin >> n;
-    classroom a[MAX];
     a[0].end = 0;
+    maxst = 0;
+    int rws = 0;
     for (int i = 1; i <= n; i++)
+    {
         cin >> a[i].start >> a[i].end;
-    dfs(a, 0);
-    cout << ans << endl;
+        maxst = max(maxst, a[i].start);
+        rws += a[i].end - a[i].start;
+    }
+    sort(a + 1, a + n + 1, cmp);
+    dfs(0, rws);
+    cout << ans;
     return 0;
 }
