@@ -40,7 +40,7 @@ int main(int agrc, char *agrv[])
 {
     while (~scanf("%d %d %d", &n, &m, &cost))
     {
-        int rw = 0;
+
         for (int i = 0; i < n; i++)
         {
 
