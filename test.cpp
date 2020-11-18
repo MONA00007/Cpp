@@ -1,51 +1,43 @@
 #include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <string>
-#include <cmath>
-#include <functional>
-#include <vector>
-#include <stack>
-#include <queue>
-#include <map>
-#include <set>
-#define MAX 31
-#define INF 1000000000
 using namespace std;
-//typedef long long int LL;
-
-struct node
+int count;
+int m, n;
+void move(int a, int b)
 {
-    int w, c;
-} a[MAX][MAX];
-
-
-int n, m, cost, minw;
-bool table[MAX];
-int mw[MAX], rw, rc, mc[MAX];
-void DFS(int index, int tw, int tc)
-{
-    if (index == n)
+    if (a == n && b == m)
     {
-        minw = min(minw, tw);
+        count++;
         return;
     }
-    for (int i = 0; i < m; i++)
+    if (a < n && b < m)
     {
-        int ttc = tc + a[index][i].c, ttw = tw + a[index][i].w;
-        if (cost >= ttc && minw > ttw && !table[i] && (rw - mw[i] + ttw < minw))
+        for (int i = 0; i <= 1; i++)
         {
-            table[i] = true;
-            rw -= mw[i];
-            DFS(index + 1, ttw, ttc);
-            table[i] = false;
-            rw += mw[i];
+            if (i == 0)
+            {
+                a += 2;
+                b += 1;
+                move(a, b);
+                a -= 2;
+                b -= 1;
+            }
+            else
+            {
+                a += 1;
+                b += 2;
+                move(a, b);
+                a -= 1;
+                b -= 2;
+            }
         }
     }
 }
 
-int main(int agrc, char *agrv[])
+int main()
+
 {
-   
-    
+
+    cin >> n >> m;
+    move(1, 1);
+    cout << count;
 }

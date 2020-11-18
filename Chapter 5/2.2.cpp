@@ -9,7 +9,7 @@
 #include <queue>
 #include <map>
 #include <set>
-#define MAX 31
+#define MAX 50
 #define INF 1000000000
 using namespace std;
 //typedef long long int LL;
@@ -31,8 +31,8 @@ void DFS(int index, int tw, int tc)
     }
     if (b[index] != -1)
     {
-        int ttc = tc + a[index][b[index]].c, ttw = tw + a[index][b[index]].w;
-        if (cost >= ttc && minw > ttw && rc - mc[index] + ttc <= cost && (rw - mw[index] + ttw < minw))
+        int ttc = tc + mc[index], ttw = tw + mw[index];
+        if (cost >= ttc && minw > ttw && rc - mc[index] + ttc <= cost && rw - mw[index] + ttw < minw)
         {
             //table[i] = true;
             rw -= mw[index];
@@ -47,7 +47,7 @@ void DFS(int index, int tw, int tc)
     for (int i = 0; i < m; i++)
     {
         int ttc = tc + a[index][i].c, ttw = tw + a[index][i].w;
-        if (cost >= ttc && minw > ttw && rc - mc[index] + ttc <= cost && (rw - mw[index] + ttw < minw))
+        if (cost >= ttc && minw > ttw && rc - mc[index] + ttc <= cost && rw - mw[index] + ttw < minw)
         {
             //table[i] = true;
             rw -= mw[index];
@@ -75,8 +75,8 @@ int main(int agrc, char *agrv[])
                 if (temp > a[i][j].w)
                     temp = a[i][j].w, t = j;
             }
-            mw[i] = temp;
-            ww[i] = t;
+            mw[i] = temp; //记录最小每件物品的最小W
+            ww[i] = t;    //记录最小W的物品号
             rw += temp;
         }
         for (int i = 0; i < n; i++)
@@ -89,7 +89,7 @@ int main(int agrc, char *agrv[])
                     temp = a[i][j].c, t = j;
             }
             mc[i] = temp;
-            if (t == ww[i])
+            if (t == ww[i]) //最小C和最小W为同一件
                 b[i] = t;
             else
                 b[i] = -1;

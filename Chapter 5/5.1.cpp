@@ -1,38 +1,34 @@
 #include <iostream>
-using std::cin;
-using std::cout;
+#include <algorithm>
+#include <cstring>
+#include <cstdio>
 
-int dp[100][100];
+using namespace std;
+const int mx = 41;
+int dp[mx][mx];
+int dx[4] = {-1, -2, -2, -1};
+int dy[4] = {-2, -1, 1, 2};
+
+int n, m;
+
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    n--, m--;
-    for (int i = 0; i <= n; i++)
+    while (cin >> n >> m)
     {
-        for (int j = 0; j <= m; j++)
-        {
-            if (i == j && j == 0)
-                dp[i][j] = 1; //循环内初始化边界
-            else if (i == 0 && j != 0)
-                dp[i][j] = 0;
-            else
+        memset(dp, 0, sizeof(dp));
+        dp[0][0] = 1;
+        for (int i = 0; i <= m; i++) //横坐标
+            for (int j = 0; j <= n; j++)
             {
-                if (i > 1)
+                for (int k = 0; k < 4; k++)
                 {
-                    if (j > 0)
-                        dp[i][j] += dp[i - 2][j - 1];
-                    if (j != m)
-                        dp[i][j] += dp[i - 2][j + 1];
+                    int tx = i + dx[k];
+                    int ty = j + dy[k];
+                    if (0 <= tx && tx <= m && 0 <= ty && ty <= n)
+                        dp[i][j] += dp[tx][ty];
                 }
-                if (j > 1)
-                    dp[i][j] += dp[i - 1][j - 2];
-                if (j < m - 1)
-                    dp[i][j] += dp[i - 1][j + 2];
             }
-        }
+        cout << dp[m - 1][n - 1];
     }
-    cout << dp[n][m];
-
     return 0;
 }
