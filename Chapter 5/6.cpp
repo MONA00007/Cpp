@@ -9,34 +9,61 @@
 #include <queue>
 #include <map>
 #include <set>
-#define MAX 41
+#define MAX 51
 //#define INF 1000000000
 using namespace std;
 //typedef long long int LL;
-int n, m, cnt;
-int xx[2] = {2, 1}, yy[2] = {1, 2};
-
-void DFS(int x, int y)
+int n, m, nowx, bestx;
+bool g[MAX][MAX];
+bool now[MAX], best[MAX];
+void DFS(int u)
 {
-    if (x == n && y == m)
+    if (u > n)
     {
-        cnt++;
+        bestx = nowx;
+        for (int i = 1; i <= n; i++)
+            best[i] = now[i];
         return;
     }
-    for (int i = 0; i < 2; i++)
+    now[u] = true;
+    for (int v = 1; v < u; v++)
     {
-        int x1 = x + xx[i], y1 = y + yy[i];
-        if (x1 >= 1 & x1 <= n && y1 <= m)
-            DFS(x1, y1);
+        if (now[v] && !g[u][v])
+        {
+            now[u] = false;
+            break;
+        }
+    }
+    if (now[u])
+        nowx++, DFS(u + 1), nowx--;
+    now[u] = false;
+    if (nowx + n - u > bestx)
+    {
+        now[u] = false;
+        DFS(u + 1);
     }
 }
 int main(int agrc, char *agrv[])
 {
-
-    while (~scanf("%d %d", &n, &m) && (m + n))
+    scanf("%d %d", &n, &m);
+    //while (~scanf("%d %d", &n, &m))
+    int a, b;
+    for (int i = 0; i < m; i++)
     {
-        cnt = 0;
-        DFS(1, 1);
-        printf("%d", cnt);
+        scanf("%d %d", &a, &b);
+        g[a][b] = g[b][a] = true;
+    }
+    DFS(1);
+    printf("%d\n", bestx);
+    int k = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        if (best[i])
+        {
+            printf("%d", i);
+            if (k != bestx)
+                printf(" ");
+            k++;
+        }
     }
 }
