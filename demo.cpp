@@ -1,37 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-struct stick
+const int MAX_N = 1003;
+int kk[MAX_N * MAX_N];
+int n, m, k[MAX_N];
+bool binary_search(int x)
 {
-    int x;
-    int y;
-} st[5005], st0[5005];
-
-int cmp(stick a, stick b)
-{
-    if (a.x != b.x)
-        return a.x < b.x;
-    return a.y < b.y;
-}
-
-int main()
-{
-    int n, i, j, m = 1;
-    cin >> n;
-    for (i = 0; i < n; i++)
-        cin >> st[i].x >> st[i].y;
-    sort(st, st + n, cmp);
-    for (i = 0; i < n; i++)
+    int l = 0, r = n * n;
+    while (r - l >= 1)
     {
-        for (j = 1; j <= m; j++)
-            if (st[i].x >= st0[j].x && st[i].y >= st0[j].y)
-            {
-                st0[j].x = st[i].x;
-                st0[j].y = st[i].y;
-                break;
-            }
-        if (j > m)
-            m++, st0[m].x = st[i].x, st0[m].y = st[i].y;
+        int i = (l + r) / 2;
+        if (kk[i] == x)
+            return true;
+        else if (kk[i] < x)
+            l = i + 1;
+        else
+            r = i;
     }
-    cout << m + 1;
+    return false;
+}
+main()
+{
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        cin >> k[i];
+    for (int c = 0; c < n; c++)
+        for (int d = 0; d < n; d++)
+            kk[c * n + d] = k[c] + k[d];
+    sort(kk, kk + n * n);
+    bool f = false;
+    for (int a = 0; a < n; a++)
+        for (int b = 0; b < n; b++)
+            if (binary_search(m - k[a] - k[b]))
+                f = true;
+    if (f)
+        printf("Yes\n");
+    else
+        printf("No\n");
 }
