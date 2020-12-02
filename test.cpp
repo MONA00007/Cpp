@@ -1,43 +1,56 @@
 #include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <stdio.h>
+#include <cmath>
 using namespace std;
-int count;
-int m, n;
-void move(int a, int b)
+struct work
 {
-    if (a == n && b == m)
+    int day;
+    int lose;
+    int t = 1;
+};
+struct work homework[1000];
+bool cmp1(struct work a1, struct work a2)
+{
+    if (a1.day == a2.day)
     {
-        count++;
-        return;
+        return a1.lose > a2.lose;
     }
-    if (a < n && b < m)
+    return a1.day < a2.day;
+}
+main()
+{
+    int m;
+
+    cin >> m;
+    for (int i = 0; i < m; i++)
     {
-        for (int i = 0; i <= 1; i++)
+        cin >> homework[i].day >> homework[i].lose;
+        homework[i].t = 1;
+    }
+
+    struct work a;
+    sort(homework, homework + m, cmp1);
+    int ans = 0, day = 1;
+    for (int i = 0; i < m; i++)
+    {
+        if (homework[i].day < day && homework[i].t == 1)
         {
-            if (i == 0)
+            ans += homework[i].lose;
+            for (int j = i + 1; j < m; j++)
             {
-                a += 2;
-                b += 1;
-                move(a, b);
-                a -= 2;
-                b -= 1;
-            }
-            else
-            {
-                a += 1;
-                b += 2;
-                move(a, b);
-                a -= 1;
-                b -= 2;
+                if (homework[j].day >= day && homework[j].t == 1)
+                {
+                    homework[j].t = 0;
+                    break;
+                }
             }
         }
+        if (homework[i].t == 1)
+        {
+            day++;
+        }
     }
-}
-
-int main()
-
-{
-
-    cin >> n >> m;
-    move(1, 1);
-    cout << count;
+    cout << ans;
 }
