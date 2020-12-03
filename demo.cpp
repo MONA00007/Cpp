@@ -1,52 +1,25 @@
 #include <iostream>
-#include <cstdio>
-#include <algorithm>
-#include <cstring>
-
 using namespace std;
-
-struct node
-{
-    int date;
-    int score;
-    int sd;
-};
-node subject[1005];
-
-int cmp(node a, node b)
-{
-    return a.score > b.score || a.score == b.score && a.date < b.date;
-}
-
+const int max_n = 1003;
 int main()
 {
-    int n;
-    int s = 0;
-    int b[1005] = {0};
-    scanf("%d", &n);
-    for (int i = 1; i <= n; i++)
-    {
-        scanf("%d %d", &subject[i].score, &subject[i].date);
-        subject[i].sd = 0;
-    }
+    int n, m, k[max_n], flag = 0;
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        cin >> k[i];
+    for (int a = 0; a < n; a++)
 
-    sort(subject + 1, subject + n + 1, cmp);
-    for (int i = 1; i <= n; i++)
-    {
-        for (int ii = subject[i].date; ii > 0; ii--)
-        {
-            if (b[ii] == 0)
-            {
-                b[ii] = 1;
-                subject[i].sd = 1;
-                break;
-            }
-        }
-        if (subject[i].sd == 0)
-        {
-            s += subject[i].score;
-        }
-    }
+        for (int b = 0; b < n; b++)
 
-    printf("%d", s);
+            for (int c = 0; c < n; c++)
+
+                for (int d = 0; d < n; d++)
+
+                    if (k[a] + k[b] + k[c] + k[d] == m)
+
+                        flag = 1;
+    if (flag == 1)
+        cout << "yes";
+    else
+        cout << "No";
 }
