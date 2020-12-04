@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define M 1001
+#define z(x) for (x = 0; x < n; x++)
 int w[M * M], n, m, k[M], a, b, f;
 int F(int x)
 {
@@ -20,16 +21,11 @@ int F(int x)
 main()
 {
     cin >> n >> m;
-    for (; a < n; a++)
-        cin >> k[a];
-    for (a = 0; a < n; a++)
-        for (b = 0; b < n; b++)
-            w[a * n + b] = k[a] + k[b];
+    z(a) cin >> k[a];
+    z(a) z(b) w[a * n + b] = k[a] + k[b];
     sort(w, w + n * n);
-    for (a = 0; a < n; a++)
-        for (b = 0; b < n; b++)
-            if (F(m - k[a] - k[b]))
-                f = 1;
+    z(a) z(b) if (F(m - k[a] - k[b]))
+        f = 1;
     if (f)
         puts("Yes");
     else

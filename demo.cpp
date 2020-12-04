@@ -1,25 +1,34 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-const int max_n = 1003;
-int main()
+#define M 1001
+#define z for(a = 0; a < n; a++)for(b = 0; b < n; b++)
+int w[M * M], n, m, k[M], a, b, f;
+int F(int x)
 {
-    int n, m, k[max_n], flag = 0;
+    int l = 0, r = n * n, i;
+    while (r - l)
+    {
+        i = (l + r) / 2;
+        if (w[i] == x)
+            return 1;
+        if (w[i] < x)
+            l = i + 1;
+        else
+            r = i;
+    }
+    return 0;
+}
+main()
+{
     cin >> n >> m;
-    for (int i = 0; i < n; i++)
-        cin >> k[i];
-    for (int a = 0; a < n; a++)
-
-        for (int b = 0; b < n; b++)
-
-            for (int c = 0; c < n; c++)
-
-                for (int d = 0; d < n; d++)
-
-                    if (k[a] + k[b] + k[c] + k[d] == m)
-
-                        flag = 1;
-    if (flag == 1)
-        cout << "yes";
+    for (; a < n; a++)
+        cin >> k[a];
+    z w[a * n + b] = k[a] + k[b];
+    sort(w, w + n * n);
+    z if (F(m - k[a] - k[b]))
+        f = 1;
+    if (f)
+        puts("Yes");
     else
-        cout << "No";
+        puts("No");
 }
